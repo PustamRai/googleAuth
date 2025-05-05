@@ -9,6 +9,7 @@ const AuthContext = createContext()
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
 
+    // get user
     const fetchUser = async () => {
         try {
             const response = await API.get('/api/auth/me', {
@@ -28,11 +29,27 @@ export const AuthProvider = ({ children }) => {
         fetchUser()
     }, [])
 
+
+    // logout
+    const logout = async () => {
+        try {
+            const response = await API.get('/api/auth/logout', {
+                withCredentials: true
+            })
+            setUser(null)
+            toast.success(response.data.message || "Logged out successfully")
+        } catch (error) {
+            console.log('error in logout: ', error.message)
+            toast.error(error.response.data.message || "Logout failed")
+        }
+    }
+
     return(
         <AuthContext.Provider value={{
             user,
             setUser, 
-            fetchUser
+            fetchUser,
+            logout
         }}>
             { children }
         </AuthContext.Provider>

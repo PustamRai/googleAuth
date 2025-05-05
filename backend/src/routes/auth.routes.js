@@ -17,8 +17,8 @@ userRouter.get(
   // if success redirect back to app
   (req, res) => {
     res.redirect(`${process.env.CLIENT_URI}/api/auth/success`);
-    console.log('Session:', req.session);
-    console.log('User:', req.user);
+    console.log("Session:", req.session);
+    console.log("User:", req.user);
   }
 
   // testing purpose
@@ -29,9 +29,13 @@ userRouter.get(
 
 // logout
 userRouter.get("/logout", (req, res) => {
-  req.logout((err) => {
-    if (err) return res.status(500).send("logout failed");
-    res.redirect(process.env.CLIENT_URI);
+  req.logout((error) => {
+    if (error) return res.status(500).json({ message: "Logout failed" });
+    req.session.destroy(() => {
+      res.clearCookie("connect.sid");
+      res.redirect("/");
+      // res.json({ message: "Logged out successfully" });
+    });
   });
 });
 
@@ -44,4 +48,4 @@ userRouter.get("/me", (req, res) => {
   }
 });
 
-export default userRouter
+export default userRouter;
