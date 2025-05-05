@@ -16,7 +16,7 @@ userRouter.get(
 
   // if success redirect back to app
   (req, res) => {
-    res.redirect(`${process.env.CLIENT_URI}/auth/success`);
+    res.redirect(`${process.env.CLIENT_URI}/api/auth/success`);
   }
 
   // testing purpose

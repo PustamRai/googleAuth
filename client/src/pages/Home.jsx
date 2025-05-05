@@ -3,13 +3,21 @@ import React, { useState } from "react";
 function Home() {
   const [email, setEmail] = useState("");
 
+  const handleGoogleLogin = () => {
+    window.open('http://localhost:8000/api/auth/google', '_self');
+  }
+
   return (
     <div className="w-full max-w-md mx-auto px-4 sm:px-6">
       <div className="bg-gray-100 rounded-lg shadow-lg p-5 sm:p-6">
         <h2 className="text-xl text-center mb-6 font-medium">Welcome Back</h2>
 
         <button className="w-full py-3 mb-4 bg-gray-300 hover:bg-gray-400 rounded flex items-center justify-center transition-colors cursor-pointer">
-          <span>Login with Google</span>
+          <span
+          onClick={handleGoogleLogin}
+          >
+            Login with Google
+          </span>
         </button>
 
         <div className="relative my-4">

@@ -1,6 +1,7 @@
 import React from "react";
 
 function Navbar() {
+
   return (
     <nav className="flex justify-between items-center p-4 bg-gray-50 sm:px-32 max-w-[1400px] mx-auto shadow-lg fixed top-0 left-0 right-0 z-50">
       <div className="flex items-center">
