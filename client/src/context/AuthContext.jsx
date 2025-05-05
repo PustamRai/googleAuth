@@ -11,14 +11,16 @@ export const AuthProvider = ({ children }) => {
 
     const fetchUser = async () => {
         try {
-            const response = await API.get('/api/auth/me')
+            const response = await API.get('/api/auth/me', {
+                withCredentials: true,
+            })
             setUser(response.data)
 
-            console.log('user res: ', response.data)
-            toast.success(response.data.message || "successful")
+            // console.log('user res: ', response.data)
+            toast.success(response.data.message || "Authentication success")
         } catch (error) {
             setUser(null)
-            toast.error(response.error.data.message || "error")
+            toast.error(error.response.data.message || "Authentication failed")
         }
     }
 

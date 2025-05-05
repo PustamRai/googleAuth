@@ -24,7 +24,7 @@ passport.use(
           });
         }
 
-        return done(null, user);
+        return done(null, user); // triggers serializeUser
       } catch (error) {
         return done(error, null);
       }
@@ -34,13 +34,19 @@ passport.use(
 
 // what minimal data needs to be stored
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  console.log("Serializing user:", user._id);
+  done(null, user._id);
 });
 
 // uses to retrieve the complete user object
 passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id);
-  done(null, user);
+  console.log("Deserializing user:", id);
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
 });
 
 export default passport

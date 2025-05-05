@@ -17,6 +17,8 @@ userRouter.get(
   // if success redirect back to app
   (req, res) => {
     res.redirect(`${process.env.CLIENT_URI}/api/auth/success`);
+    console.log('Session:', req.session);
+    console.log('User:', req.user);
   }
 
   // testing purpose
@@ -38,7 +40,7 @@ userRouter.get("/me", (req, res) => {
   if (req.isAuthenticated()) {
     res.json(req.user);
   } else {
-    res.status(401).json({ message: "Not authenticate" });
+    res.status(401).json({ message: "User not authenticate" });
   }
 });
 

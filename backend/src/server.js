@@ -22,8 +22,9 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        sameSite: "none",
-        secure: true
+        httpOnly: true,
+        secure: false, // set to true in production (HTTPS)
+        sameSite: 'lax', // 'none' only if cross-origin + HTTPS
     }
 }))
 
