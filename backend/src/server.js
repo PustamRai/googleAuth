@@ -22,9 +22,18 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
+        secure: true,
+        sameSite: 'none', // required for cross-site cookies
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+
+        // for localhost
         httpOnly: true,
         secure: false, // set to true in production (HTTPS)
         sameSite: 'lax', // 'none' only if cross-origin + HTTPS
+
+
+        
+        
     }
 }))
 
