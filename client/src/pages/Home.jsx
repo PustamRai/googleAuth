@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom"
 
 function Home() {
-  const handleGoogleLogin = () => {
-    window.open("http://localhost:8000/api/auth/google", "_self");
-  };
 
   return (
     <div className="w-full max-w-md mx-auto px-4 sm:px-6">
