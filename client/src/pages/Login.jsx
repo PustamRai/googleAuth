@@ -4,7 +4,8 @@ function Login() {
   const [email, setEmail] = useState("");
 
   const handleGoogleLogin = () => {
-    window.open("http://localhost:8000/api/auth/google", "_self");
+    const baseURL = import.meta.env.VITE_BACKEND_URI;
+    window.open(`${baseURL}/api/auth/google`, "_self");
   };
 
   return (
