@@ -21,7 +21,8 @@ export const AuthProvider = ({ children }) => {
             toast.success(response.data.message || "Authentication success")
         } catch (error) {
             setUser(null)
-            toast.error(error.response.data.message || "Authentication failed")
+            console.log("Authentication failed: ", error.message)
+            // toast.error(error.response.data.message || "Authentication failed")
         }
     }
 
