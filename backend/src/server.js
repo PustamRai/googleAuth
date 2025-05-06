@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import { connectDB } from './config/db.js'
 import session from 'express-session'
 import passport from './config/password.js'
+import MongoStore from 'connect-mongo'
 import userRouter from './routes/auth.routes.js'
 
 dotenv.config()
@@ -21,19 +22,16 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI, // MongoDB URI (Atlas/local)
+        collectionName: 'sessions',
+        ttl: 24 * 60 * 60, // 1 day in seconds
+    }),
     cookie: {
-        secure: true,
-        sameSite: 'none', // required for cross-site cookies
-        maxAge: 24 * 60 * 60 * 1000, // 1 day
-
-        // for localhost
+        secure: process.env.NODE_ENV === "production", // true if using HTTPS
         httpOnly: true,
-        secure: false, // set to true in production (HTTPS)
-        sameSite: 'lax', // 'none' only if cross-origin + HTTPS
-
-
-        
-        
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+        maxAge: 24 * 60 * 60 * 1000, // 1 day in ms
     }
 }))
 
