@@ -16,7 +16,7 @@ userRouter.get(
 
   // if success redirect back to app
   (req, res) => {
-    res.redirect(`${process.env.CLIENT_URI}/api/auth/success`);
+    res.redirect(`${process.env.CLIENT_URL}/api/auth/success`);
     console.log("Session:", req.session);
     console.log("User:", req.user);
   }
