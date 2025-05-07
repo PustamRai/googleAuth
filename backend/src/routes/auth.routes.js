@@ -41,9 +41,6 @@ userRouter.get("/logout", (req, res) => {
 
 // frontend
 userRouter.get("/me", (req, res) => {
-  console.log("SESSION:", req.session);
-  console.log("USER:", req.user);
-  
   if (req.isAuthenticated()) {
     res.json(req.user);
   } else {
