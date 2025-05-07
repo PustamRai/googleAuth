@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         fetchUser()
-    }, [])
+    }, [setUser])
 
 
     // logout
