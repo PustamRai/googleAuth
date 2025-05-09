@@ -8,18 +8,6 @@ function ForgotPassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      if (email && email.includes("@")) {
-        setMessage("Password reset link has been sent to your email");
-        setMessageType("success");
-      } else {
-        setMessage("Please enter a valid email address");
-        setMessageType("error");
-      }
-      setIsSubmitting(false);
-    }, 1000);
   };
 
   return (
