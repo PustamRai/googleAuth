@@ -2,17 +2,21 @@ import mongoose, { Schema } from "mongoose";
 
 const userSchema = new Schema(
     {
-        googleId: {
+        name: {
             type: String,
             required: true,
-            unique: true
+            unique: true,
         },
-        
-        name: String,
-        email: String,
-        avatar: String,
-        password: String
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
     }
 )
 
-export const User = mongoose.model('User', userSchema)
+export const User = mongoose.model("User", userSchema)

@@ -1,11 +1,11 @@
-import { User } from "../models/user.models";
+import { User } from "../models/user.models.js";
 import validator from 'validator';
 import bcrypt from 'bcrypt'
 
 export const signUp = async (req, res) => {
-    const { email, password } = req.body
+    const { name, email, password } = req.body
 
-    if(!email || !password) {
+    if(!name || !email || !password) {
         return res.status(400).json({
             success: false,
             message: "All fields are required"
@@ -13,7 +13,7 @@ export const signUp = async (req, res) => {
     }
 
     // checking exisiting user
-    const exisitingUser = await User.findOne(email)
+    const exisitingUser = await User.findOne({ email })
     if(exisitingUser) {
         return res.status(400).json({
             success: false,
@@ -37,10 +37,11 @@ export const signUp = async (req, res) => {
     }
 
     // hashing plain text password
-    const hashPassword = bcrypt.hash(password, 10)
+    const hashPassword = await bcrypt.hash(password, 10)
 
     // user
     const user = await User.create({
+        name,
         email,
         password: hashPassword
     })

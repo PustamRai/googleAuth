@@ -5,7 +5,8 @@ import { connectDB } from './config/db.js'
 import session from 'express-session'
 import passport from './config/password.js'
 import MongoStore from 'connect-mongo'
-import userRouter from './routes/auth.routes.js'
+import authRouter from './routes/auth.routes.js'
+import userRouter from './routes/user.routes.js'
 
 dotenv.config()
 
@@ -43,6 +44,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // end points
+app.use('/api/auth', authRouter)
 app.use('/api/auth', userRouter)
 
 

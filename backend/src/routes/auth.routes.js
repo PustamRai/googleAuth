@@ -1,15 +1,15 @@
 import passport from "passport";
 import { Router } from "express";
 
-const userRouter = Router();
+const authRouter = Router();
 
-userRouter.get(
+authRouter.get(
   "/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 // callback
-userRouter.get(
+authRouter.get(
   "/google/callback",
   // if callback failed
   passport.authenticate("google", { failureRedirect: "/" }),
@@ -28,7 +28,7 @@ userRouter.get(
 );
 
 // logout
-userRouter.get("/logout", (req, res) => {
+authRouter.get("/logout", (req, res) => {
   req.logout((error) => {
     if (error) return res.status(500).json({ message: "Logout failed" });
     req.session.destroy(() => {
@@ -40,7 +40,7 @@ userRouter.get("/logout", (req, res) => {
 });
 
 // frontend
-userRouter.get("/me", (req, res) => {
+authRouter.get("/me", (req, res) => {
   if (req.isAuthenticated()) {
     res.json(req.user);
   } else {
@@ -48,4 +48,4 @@ userRouter.get("/me", (req, res) => {
   }
 });
 
-export default userRouter;
+export default authRouter;
