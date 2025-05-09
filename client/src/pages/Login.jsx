@@ -11,6 +11,10 @@ function Login() {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  
+  const handleGoogleLogin = () => {
+    window.open('http://localhost:8000/api/auth/google', '_self');
+  }
 
   const handleSubmit = (e) => {
     if (e) e.preventDefault();
@@ -28,8 +32,9 @@ function Login() {
         {/* Social Login Buttons */}
         <div className="space-y-4 mb-6">
           <button 
-            className="w-full flex items-center justify-center gap-3 py-3 px-5  border-1 border-gray-800 rounded-md  bg-gray-200 hover:bg-gray-300 transition-colors"
+            className="w-full flex items-center justify-center gap-3 py-3 px-5  border-1 border-gray-800 rounded-md  bg-gray-200 hover:bg-gray-300 transition-colors cursor-pointer"
             type="button"
+            onClick={handleGoogleLogin}
           >
             <FcGoogle size={20} />
             Continue with Google

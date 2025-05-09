@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/Layout/Navbar";
 import Login from "./pages/Login";
 import Signup from "./components/Signup";
+import ForgotPassword from "./components/ForgetPassword";
 
 function App() {
   
@@ -17,6 +18,7 @@ function App() {
             <Route path='/api/auth/success' element={<Navbar />} />
             <Route path="/login" element={<Login />} />
             <Route path="/sign-up" element={<Signup />} />
+            <Route path="/forget-password" element={<ForgotPassword />} />
           </Route>
         </Routes>
       </Router>
