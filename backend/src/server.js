@@ -5,6 +5,7 @@ import { connectDB } from './config/db.js'
 import session from 'express-session'
 import passport from './config/password.js'
 import MongoStore from 'connect-mongo'
+import cookieParser from 'cookie-parser'
 import authRouter from './routes/auth.routes.js'
 import userRouter from './routes/user.routes.js'
 
@@ -42,6 +43,7 @@ app.use(session({
 app.use(express.json())
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(cookieParser())
 
 // end points
 app.use('/api/auth', authRouter)
