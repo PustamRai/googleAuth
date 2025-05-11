@@ -2,11 +2,14 @@ import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
 
 function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+
+  const { signUp} = useAuthContext()
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -16,10 +19,10 @@ function Signup() {
     window.open('http://localhost:8000/api/auth/google', '_self');
   }
 
-  const handleSubmit = (e) => {
-    if (e) e.preventDefault();
-    // Handle login logic here
-    console.log("Login submitted", { email, password });
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    await signUp({ email, password })
   };
 
   return (
@@ -52,7 +55,9 @@ function Signup() {
         </div>
 
         {/* signup Form */}
-        <div className="space-y-5">
+        <form
+        onSubmit={handleSubmit}
+        className="space-y-5">
           <div>
             <label
               htmlFor="email"
@@ -99,8 +104,7 @@ function Signup() {
 
           {/* signup Button */}
           <button
-            onClick={handleSubmit}
-            type="button"
+            type="submit"
             className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-colors cursor-pointer"
           >
             Sign up
@@ -116,7 +120,7 @@ function Signup() {
               Log in
             </Link>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

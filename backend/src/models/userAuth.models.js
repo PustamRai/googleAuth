@@ -4,8 +4,9 @@ const userAuthSchema = new Schema(
     {
         googleId: {
             type: String,
-            required: true,
-            unique: true
+            required: false,
+            unique: true,
+            sparse: true,
         },
         
         name: String,

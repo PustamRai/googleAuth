@@ -18,10 +18,12 @@ const generateRefreshToken = (user) => {
 
 // signup
 export const signUp = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { email, password } = req.body;
 
+  console.log('email: ', email)
+  console.log('pass: ', password)
   try {
-    if (!name || !email || !password) {
+    if (!email || !password) {
       return res.status(400).json({
         success: false,
         message: "All fields are required",
@@ -30,6 +32,8 @@ export const signUp = async (req, res) => {
 
     // checking exisiting user
     const exisitingUser = await User.findOne({ email });
+
+    console.log('existing user: ', exisitingUser)
     if (exisitingUser) {
       return res.status(400).json({
         success: false,
@@ -57,10 +61,11 @@ export const signUp = async (req, res) => {
 
     // user
     const user = await User.create({
-      name,
       email,
       password: hashPassword,
     });
+
+    console.log('new user: ',  user)
 
     const userCreated = await User.findById(user._id).select("-password");
     console.log("user: ", userCreated);
